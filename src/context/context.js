@@ -7,13 +7,33 @@ const GithubContext = React.createContext();
 
 const GithubProvider = ({ children }) => {
   const [ githubUser, setGithubUser ] = useState(null)
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await axios.get(`${rootUrl}/users/chenjianrui`)
+  const [ follower, setFollower ] = useState(null)
+  const [ repos, setRepos ] = useState(null)
+  
+  const searchGithubUser = async user => {
+    const response = await axios.get(`${rootUrl}/users/${user}`)
+    
+    if(response){
       setGithubUser(response.data)
+      const { login, followers_url } = response.data
+      try {
+        const [repos, followers] = await Promise.all([
+          axios(`${rootUrl}/users/${login}/repos?per_page=100`),
+          axios(`${followers_url}?per_page=100`)
+        ])
+        if(repos){
+          setRepos(repos.data)
+        }
+        if(followers){
+          setFollower(followers.data)
+        }
+      } catch (error) {
+        console.log(error)
+      }
     }
-    fetchData()
+  }
+  useEffect(() => {
+    searchGithubUser('chenjianrui')
   }, [])
   return (
     <GithubContext.Provider value={{ githubUser }}>
