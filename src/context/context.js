@@ -7,7 +7,7 @@ const GithubContext = React.createContext();
 
 const GithubProvider = ({ children }) => {
   const [ githubUser, setGithubUser ] = useState(null)
-  const [ follower, setFollower ] = useState(null)
+  const [ followers, setFollowers ] = useState(null)
   const [ repos, setRepos ] = useState(null)
   
   const searchGithubUser = async user => {
@@ -25,7 +25,7 @@ const GithubProvider = ({ children }) => {
           setRepos(repos.data)
         }
         if(followers){
-          setFollower(followers.data)
+          setFollowers(followers.data)
         }
       } catch (error) {
         console.log(error)
@@ -36,7 +36,7 @@ const GithubProvider = ({ children }) => {
     searchGithubUser('chenjianrui')
   }, [])
   return (
-    <GithubContext.Provider value={{ githubUser }}>
+    <GithubContext.Provider value={{ githubUser, followers }}>
       { children }
     </GithubContext.Provider>
   )
