@@ -36,7 +36,7 @@ const GithubProvider = ({ children }) => {
     searchGithubUser('chenjianrui')
   }, [])
   return (
-    <GithubContext.Provider value={{ githubUser, followers }}>
+    <GithubContext.Provider value={{ githubUser, followers, repos }}>
       { children }
     </GithubContext.Provider>
   )
