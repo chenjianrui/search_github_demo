@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { GithubContext } from '../context/context'
 
-import { Pie, Doughnut, Column } from './Charts'
+import { Pie, Doughnut, Column, Bar } from './Charts'
 
 
 const Repos = () => {
@@ -38,10 +38,15 @@ const Repos = () => {
         label: name,
         value: stargazers_count
       }
+      total.forks[forks] = {
+        label: name,
+        value: forks
+      }
       return total
     }, {stars: {}, forks: {}})
     
     stars = Object.values(stars).slice(-5).reverse()
+    forks = Object.values(forks).slice(-5).reverse()
 
     return (
       <section className='section'>
@@ -49,6 +54,7 @@ const Repos = () => {
           <Pie data={languageRepos}/>
           <Column data={stars}/>
           <Doughnut data={starsRepos}/>
+          <Bar data={forks}/>
         </Wrapper>
       </section>
     )
