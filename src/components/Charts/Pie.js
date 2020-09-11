@@ -41,12 +41,13 @@ const ChartComponent = ({ data }) => {
         showPlotBorder: 0,
         paletteColors:
           "#2caeba, #5D62B5, #FFC533, #F2726F, #8d6e63, #1de9b6, #6E80CA",
-        use3DLighting: 0,
-        useDataPlotColorForLabels: 0,
-        bgColor: "#FFFFFF",
-        showBorder: 0,
-        decimals: 0,
-        pieRadius: "45%",
+        enableSmartLabels: 0,
+        startingAngle: 0,
+        showPercentValues: 1,
+        decimals: 1,
+        useDataPlotColorForLabels: 1,
+        theme: 'fusion',
+        pieRadius: '55%'
       },
       // Chart Data
       data,
