@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { GithubContext } from '../context/context'
 
-import { Pie, Doughnut } from './Charts'
+import { Pie, Doughnut, Column } from './Charts'
 
 
 const Repos = () => {
@@ -31,11 +31,23 @@ const Repos = () => {
     // 轉為陣列物件符合 Chart 的格式，再從高到低排序取前五名，最後用 map 來把 stars 覆蓋到 value 上
     // 就能符合格式
     const starsRepos = Object.values(languages).sort((a, b) => b.stars - a.stars).map(item => ({...item, value: item.stars || 1})).slice(0 ,5)
+
+    let {stars, forks} = repos.reduce((total, item) => {
+      const { stargazers_count, name, forks } = item
+      total.stars[stargazers_count] = {
+        label: name,
+        value: stargazers_count
+      }
+      return total
+    }, {stars: {}, forks: {}})
+    
+    stars = Object.values(stars).slice(-5).reverse()
+
     return (
       <section className='section'>
         <Wrapper className='section-center'>
           <Pie data={languageRepos}/>
-          <div></div>
+          <Column data={stars}/>
           <Doughnut data={starsRepos}/>
         </Wrapper>
       </section>
