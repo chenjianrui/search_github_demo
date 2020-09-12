@@ -66,6 +66,12 @@ const Info = () => {
       </section>
     )
   }
+  return (
+    <section className='section'>
+      <Wrapper className='section-center'>
+      </Wrapper>
+    </section>
+  )
 }
 
 const Item = ({ icon, label, value, color }) => (

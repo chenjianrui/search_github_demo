@@ -47,6 +47,9 @@ const Card = () => {
       </Wrapper>
     )
   }
+  return (
+    <div></div>
+  )
 }
 
 const Wrapper = styled.article`

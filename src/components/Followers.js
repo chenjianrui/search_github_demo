@@ -36,6 +36,9 @@ const Followers = () => {
       </Wrapper>
     )
   }
+  return (
+    <div></div>
+  )
 }
 
 const Wrapper = styled.article`
@@ -65,7 +68,10 @@ const Wrapper = styled.article`
     display: grid;
     grid-template-rows: repeat(auto-fill, minmax(45px, 1fr));
     gap: 1.25rem 1rem;
-    padding: 1rem 2rem;
+    padding: 1.5rem 0;
+    @media (min-width: 768px){
+      padding: 1rem 2rem;
+    }
   }
   article {
     transition: var(--transition);
