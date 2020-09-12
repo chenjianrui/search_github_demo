@@ -2,12 +2,25 @@ import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { GoRepo, GoGist } from 'react-icons/go'
 import { FiUsers, FiUserPlus } from 'react-icons/fi'
+import Skeleton from 'react-loading-skeleton'
 
 import { GithubContext } from '../context/context'
 
 const Info = () => {
-  const { githubUser } = useContext(GithubContext)
-  let content = <div>Loading...</div>
+  const { githubUser, isLoading } = useContext(GithubContext)
+
+  if(isLoading){
+    return (
+      <section className='section'>
+        <Wrapper className='section-center'>
+          <Skeleton count={2} />
+          <Skeleton count={2} />
+          <Skeleton count={2} />
+          <Skeleton count={2} />
+        </Wrapper>
+      </section>
+    )
+  }
   if(githubUser !== null){
     const { public_repos, followers, following, public_gists } = githubUser
     const items = [
@@ -41,17 +54,18 @@ const Info = () => {
       },
     ]
     
-    content = items.map(item => (
-      <Item key={item.id} {...item}/>
-    ))
+    return (
+      <section className='section'>
+        <Wrapper className='section-center'>
+          {
+            items.map(item => (
+              <Item key={item.id} {...item}/>
+            ))
+          }
+        </Wrapper>
+      </section>
+    )
   }
-  return (
-    <section className='section'>
-      <Wrapper className='section-center'>
-        { content }
-      </Wrapper>
-    </section>
-  )
 }
 
 const Item = ({ icon, label, value, color }) => (

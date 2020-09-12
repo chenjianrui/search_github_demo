@@ -1,9 +1,19 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { GithubContext } from '../context/context'
+import Skeleton from 'react-loading-skeleton'
 
 const Followers = () => {
-  const { followers } = useContext(GithubContext)
+  const { followers, isLoading } = useContext(GithubContext)
+  if(isLoading){
+    return (
+      <Wrapper>
+        <div className='followers'>
+          <Skeleton count={10}/>
+        </div>
+      </Wrapper>
+    )
+  }
   if(followers){
     return (
       <Wrapper>
@@ -26,11 +36,6 @@ const Followers = () => {
       </Wrapper>
     )
   }
-  return (
-    <Wrapper>
-      Loading...
-    </Wrapper>
-  )
 }
 
 const Wrapper = styled.article`

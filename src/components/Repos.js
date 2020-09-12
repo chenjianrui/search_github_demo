@@ -1,12 +1,34 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { GithubContext } from '../context/context'
+import Skeleton from 'react-loading-skeleton'
 
 import { Pie, Doughnut, Column, Bar } from './Charts'
 
 
 const Repos = () => {
-  const { repos } = useContext(GithubContext)
+  const { repos, isLoading } = useContext(GithubContext)
+  console.log(isLoading)
+  if(isLoading){
+    return (
+      <section className='section'>
+        <Wrapper className='section-center'>
+          <div>
+            <Skeleton count={10}/>
+          </div>
+          <div>
+            <Skeleton count={10}/>
+          </div>
+          <div>
+            <Skeleton count={10}/>
+          </div>
+          <div>
+            <Skeleton count={10}/>
+          </div>
+        </Wrapper>
+      </section>
+    )
+  }
   if(repos) {
     const languages = repos.reduce((total, item) => {
       const { language, stargazers_count } = item
@@ -59,13 +81,6 @@ const Repos = () => {
       </section>
     )
   }
-  return (
-    <section className='section'>
-      <Wrapper className='section-center'>
-        Loading...
-      </Wrapper>
-    </section>
-  )
 }
 
 const Wrapper = styled.div`
