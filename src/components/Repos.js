@@ -8,7 +8,6 @@ import { Pie, Doughnut, Column, Bar } from './Charts'
 
 const Repos = () => {
   const { repos, isLoading } = useContext(GithubContext)
-  console.log(isLoading)
   if(isLoading){
     return (
       <section className='section'>

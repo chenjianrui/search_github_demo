@@ -34,7 +34,7 @@ const Search = () => {
           />
           {request > 0 && !isLoading && <button type='submit'>search</button>}
         </form>
-        <h3>Requests: {isLoading ? <Skeleton width={50}/> : {request} / 60}</h3>
+        <h3>Requests: {isLoading ? <Skeleton width={50}/> : `${request} / 60`}</h3>
       </Wrapper>
     </section>
   )
