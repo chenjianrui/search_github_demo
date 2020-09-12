@@ -1,11 +1,26 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { MdBusiness, MdLocationOn, MdLink } from 'react-icons/md'
+import Skeleton from 'react-loading-skeleton'
 
 import { GithubContext } from '../context/context'
 
 const Card = () => {
-  const { githubUser } = useContext(GithubContext)
+  const { githubUser, isLoading } = useContext(GithubContext)
+  if(isLoading){
+    return (
+      <Wrapper>
+        <header>
+          <Skeleton circle={true} width={50} height={50}/>
+          <div>
+            <Skeleton count={2}/>
+          </div>
+          <Skeleton count={2}/>
+        </header>
+        <Skeleton count={3}/>
+      </Wrapper>
+    )
+  }
   if(githubUser){
     const { avatar_url, html_url, name, bio, twitter_username, company, blog, location } = githubUser
     
@@ -33,9 +48,7 @@ const Card = () => {
     )
   }
   return (
-    <Wrapper>
-      Loading...
-    </Wrapper>
+    <div></div>
   )
 }
 

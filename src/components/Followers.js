@@ -1,9 +1,19 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { GithubContext } from '../context/context'
+import Skeleton from 'react-loading-skeleton'
 
 const Followers = () => {
-  const { followers } = useContext(GithubContext)
+  const { followers, isLoading } = useContext(GithubContext)
+  if(isLoading){
+    return (
+      <Wrapper>
+        <div className='followers'>
+          <Skeleton count={10}/>
+        </div>
+      </Wrapper>
+    )
+  }
   if(followers){
     return (
       <Wrapper>
@@ -27,9 +37,7 @@ const Followers = () => {
     )
   }
   return (
-    <Wrapper>
-      Loading...
-    </Wrapper>
+    <div></div>
   )
 }
 
@@ -60,7 +68,10 @@ const Wrapper = styled.article`
     display: grid;
     grid-template-rows: repeat(auto-fill, minmax(45px, 1fr));
     gap: 1.25rem 1rem;
-    padding: 1rem 2rem;
+    padding: 1.5rem 0;
+    @media (min-width: 768px){
+      padding: 1rem 2rem;
+    }
   }
   article {
     transition: var(--transition);
