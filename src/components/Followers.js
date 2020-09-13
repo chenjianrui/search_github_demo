@@ -64,6 +64,7 @@ const Wrapper = styled.article`
   }
   .followers {
     overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
     height: 260px;
     display: grid;
     grid-template-rows: repeat(auto-fill, minmax(45px, 1fr));
@@ -82,7 +83,7 @@ const Wrapper = styled.article`
     align-items: center;
     column-gap: 1rem;
     img {
-      height: 100%;
+      height: 45px;
       width: 45px;
       border-radius: 50%;
       object-fit: cover;
